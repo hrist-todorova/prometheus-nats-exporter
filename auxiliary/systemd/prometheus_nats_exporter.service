@@ -1,0 +1,13 @@
+[Unit]
+Description=Application that exports NATS server metrics to Prometheus for monitoring
+Requires=network-online.target gnatsd.service
+After=network-online.target gnatsd.service
+
+[Service]
+Restart=always
+StartLimitInterval=0
+ExecStart=/usr/bin/prometheus_nats_exporter -varz http://localhost:8222
+
+[Install]
+WantedBy=multi-user.target
+
